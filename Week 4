@@ -1,0 +1,24 @@
+REPORT z_week4_connection_demo.
+
+DATA: lv_carrier_id  TYPE /dmo/carrier_id VALUE 'LH',
+      lv_connection  TYPE /dmo/connection_id VALUE '0400',
+      lv_airport_from TYPE /dmo/airport_from_id,
+      lv_airport_to   TYPE /dmo/airport_to_id.
+
+SELECT SINGLE
+    airport_from_id,
+    airport_to_id
+  FROM /dmo/connection
+  WHERE carrier_id    = @lv_carrier_id
+    AND connection_id = @lv_connection
+  INTO (@lv_airport_from, @lv_airport_to).
+
+IF sy-subrc = 0.
+  WRITE: / 'Connection Found:'.
+  WRITE: / 'Carrier ID:', lv_carrier_id.
+  WRITE: / 'Connection ID:', lv_connection.
+  WRITE: / 'From Airport:', lv_airport_from.
+  WRITE: / 'To Airport:', lv_airport_to.
+ELSE.
+  WRITE: / 'No connection found for the given keys.'.
+ENDIF.
