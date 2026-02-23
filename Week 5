@@ -1,0 +1,27 @@
+CLASS zcl_sample_solution DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC.
+
+  PUBLIC SECTION.
+    METHODS:
+      calculate_free_seats
+        IMPORTING
+          iv_max_seats     TYPE i
+          iv_occupied_seats TYPE i
+        RETURNING
+          VALUE(rv_free)    TYPE i.
+
+ENDCLASS.
+
+
+CLASS zcl_sample_solution IMPLEMENTATION.
+
+  METHOD calculate_free_seats.
+
+    " Simple calculation
+    rv_free = iv_max_seats - iv_occupied_seats.
+
+  ENDMETHOD.
+
+ENDCLASS.
