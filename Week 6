@@ -1,0 +1,40 @@
+REPORT z_week6_datatypes_demo.
+
+DATA: lv_int        TYPE i VALUE 10,
+      lv_int8       TYPE int8 VALUE 10000000000,
+      lv_packed     TYPE p LENGTH 5 DECIMALS 2 VALUE '12.34',
+      lv_decfloat   TYPE decfloat34,
+      lv_string     TYPE string VALUE 'ABAP',
+      lv_char       TYPE c LENGTH 5 VALUE 'HELLO',
+      lv_date1      TYPE d VALUE '20250301',
+      lv_date2      TYPE d VALUE '20250220',
+      lv_days       TYPE i,
+      lv_timestamp  TYPE utclong.
+
+" Numeric calculation
+lv_decfloat = lv_int + lv_packed.
+
+" Forced type conversion
+lv_int = CONV i( lv_packed ).
+
+" Lossless conversion using EXACT
+TRY.
+    lv_packed = EXACT #( 1 / 4 ).
+  CATCH cx_sy_conversion_error INTO DATA(lx_error).
+    WRITE: / 'Conversion error occurred'.
+ENDTRY.
+
+" Date subtraction
+lv_days = lv_date1 - lv_date2.
+
+" Current timestamp
+GET TIME STAMP FIELD lv_timestamp.
+
+WRITE: / 'Integer:', lv_int,
+       / 'INT8:', lv_int8,
+       / 'Packed:', lv_packed,
+       / 'Decfloat:', lv_decfloat,
+       / 'String:', lv_string,
+       / 'Character:', lv_char,
+       / 'Days Difference:', lv_days,
+       / 'Timestamp:', lv_timestamp.
