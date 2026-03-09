@@ -1,0 +1,49 @@
+DATA(text) TYPE string VALUE 'Hello ABAP World'.
+DATA(length) TYPE i.
+DATA(position) TYPE i.
+DATA(part) TYPE string.
+DATA(upper_text) TYPE string.
+DATA(lower_text) TYPE string.
+DATA(email) TYPE string VALUE 'student@example.com'.
+
+WRITE: / '--- Text Symbol Example ---'.
+
+DATA(message) TYPE string.
+message = 'Welcome to the ABAP training program'(t01).
+WRITE: / message.
+
+WRITE: / ' '.
+WRITE: / '--- String Function Examples ---'.
+
+length = strlen( text ).
+position = find( val = text sub = 'ABAP' ).
+
+WRITE: / 'Original text:', text.
+WRITE: / 'Length of text:', length.
+WRITE: / 'Position of ABAP:', position.
+
+WRITE: / ' '.
+WRITE: / '--- Substring Example ---'.
+
+part = substring( val = text off = 6 len = 4 ).
+WRITE: / 'Extracted part:', part.
+
+WRITE: / ' '.
+WRITE: / '--- Case Conversion ---'.
+
+upper_text = to_upper( text ).
+lower_text = to_lower( text ).
+
+WRITE: / 'Uppercase:', upper_text.
+WRITE: / 'Lowercase:', lower_text.
+
+WRITE: / ' '.
+WRITE: / '--- Regular Expression Example ---'.
+
+FIND REGEX '\w+@\w+\.\w+' IN email.
+
+IF sy-subrc = 0.
+  WRITE: / 'Email format looks valid'.
+ELSE.
+  WRITE: / 'Email format is invalid'.
+ENDIF.
