@@ -1,0 +1,33 @@
+TYPES: BEGIN OF ty_flight,
+         carrid TYPE string,
+         price  TYPE p LENGTH 8 DECIMALS 2,
+       END OF ty_flight.
+
+DATA flights TYPE STANDARD TABLE OF ty_flight.
+DATA result  TYPE STANDARD TABLE OF ty_flight.
+DATA ratio   TYPE p LENGTH 8 DECIMALS 1.
+
+APPEND VALUE #( carrid = 'AA' price = '120.50' ) TO flights.
+APPEND VALUE #( carrid = 'AA' price = '120.50' ) TO flights.
+APPEND VALUE #( carrid = 'DL' price = '300.00' ) TO flights.
+
+SORT flights BY carrid price.
+DELETE ADJACENT DUPLICATES FROM flights.
+
+LOOP AT flights ASSIGNING FIELD-SYMBOL(<flight>).
+  WRITE: / 'Carrier:', <flight>-carrid, 'Price:', <flight>-price.
+ENDLOOP.
+
+DATA(value1) = 10.
+DATA(value2) = 3.
+
+ratio = value1 / value2.
+
+WRITE: / 'Division result:', ratio.
+
+DATA(text) TYPE string VALUE 'ABAPSQL'.
+DATA(first_letter) TYPE string.
+
+first_letter = substring( val = text off = 0 len = 1 ).
+
+WRITE: / 'First letter:', first_letter.
