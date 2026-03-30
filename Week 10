@@ -1,0 +1,12 @@
+DATA lv_name TYPE string.
+
+SELECT FROM /lrn/s4d430_ind
+  FIELDS *
+  INTO TABLE @DATA(result).
+
+WRITE: / 'Number of rows read:', lines( result ).
+
+LOOP AT result INTO DATA(ls_result).
+  WRITE: / ls_result.
+ENDLOOP.
+
