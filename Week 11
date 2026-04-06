@@ -1,0 +1,17 @@
+TYPES: BEGIN OF ty_employee,
+         employee_id TYPE i,
+         first_name  TYPE string,
+         last_name   TYPE string,
+         salary      TYPE p LENGTH 8 DECIMALS 2,
+       END OF ty_employee.
+
+DATA employee TYPE ty_employee.
+
+employee-employee_id = 1.
+employee-first_name  = 'Daniel'.
+employee-last_name   = 'Kefene'.
+employee-salary      = '50000.00'.
+
+WRITE: / 'Employee ID:', employee-employee_id.
+WRITE: / 'Name:', employee-first_name, employee-last_name.
+WRITE: / 'Salary:', employee-salary.
