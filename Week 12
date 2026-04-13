@@ -1,0 +1,11 @@
+DATA: BEGIN OF flight,
+        airlineid TYPE string,
+        cityfrom  TYPE string,
+        cityto    TYPE string,
+      END OF flight.
+
+flight-airlineid = 'LH'.
+flight-cityfrom  = 'Frankfurt'.
+flight-cityto    = 'Berlin'.
+
+WRITE: / flight-airlineid, flight-cityfrom, flight-cityto.
