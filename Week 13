@@ -1,0 +1,11 @@
+@AbapCatalog.sqlViewName: 'ZEMPVIEW'
+@EndUserText.label: 'Employee Basic View'
+
+define view entity Z_Employee_View
+  as select from /dmo/employee
+{
+  key employee_id    as EmployeeID,
+      first_name     as FirstName,
+      last_name      as LastName,
+      department_id  as DepartmentId
+}
