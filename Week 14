@@ -1,0 +1,25 @@
+@EndUserText.label: 'Employee with Department Info'
+define view entity ZI_Employee_Final
+  as select from zemployee
+  association [1..1] to ZI_Department as _Department
+    on $projection.DepartmentId = _Department.Id
+{
+  key EmployeeId,
+      FirstName,
+      LastName,
+      DepartmentId,
+
+      _Department.Name as DepartmentName,
+
+  @EndUserText.label: 'Monthly Salary'
+  cast( AnnualSalary as abap.fltp ) / 12.0 as MonthlySalary,
+
+  @EndUserText.label: 'Employee Role'
+  case EmployeeId
+    when _Department.HeadId      then 'H'
+    when _Department.AssistantId then 'A'
+    else ' '
+  end as EmployeeRole,
+
+  _Department
+}
